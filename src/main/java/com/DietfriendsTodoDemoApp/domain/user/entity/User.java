@@ -60,9 +60,10 @@ public class User {
     private List<Role> roles = new ArrayList<>();
 
     @Builder
-    public User(String userName, String password, List<Role> roles) {
+    public User(String userName, String password, Integer age,List<Role> roles) {
         this.userName = userName;
         this.password = password;
+        this.age = age;
         this.roles = Collections.singletonList(Role.ROLE_MEMBER);
     }
 
