@@ -1,12 +1,27 @@
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+
+	// queryDSL
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+bootJar{
+	archivesBaseName = 'Dietfriends-Todo-Demo-App'
+	archiveFileName = 'Dietfriends-Todo-Demo-App.jar'
+	archiveVersion = "0.0.1"
+}
 
 configurations {
 	compileOnly {
@@ -16,6 +31,10 @@ configurations {
 
 repositories {
 	mavenCentral()
+}
+
+jar {
+	enabled = false
 }
 
 dependencies {
@@ -28,7 +47,11 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 
-	runtimeOnly 'com.h2database:h2'
+	// QueryDSL
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+	runtimeOnly 'mysql:mysql-connector-java'
 	compileOnly 'org.projectlombok:lombok'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -39,4 +62,25 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// QueryDSL
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+sourceSets {
+	main.java.srcDir querydslDir
+}
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath
+
 }

@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/sign")
+@RequestMapping("/signs")
 public class UserController {
 
     private final SignService signService;

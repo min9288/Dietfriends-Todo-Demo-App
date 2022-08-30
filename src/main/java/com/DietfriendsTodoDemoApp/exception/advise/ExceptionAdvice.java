@@ -44,4 +44,33 @@ public class ExceptionAdvice {
     public Result userNotFoundException() {
         return responseService.getFailureResult(-404, "회원정보를 찾을 수 없습니다.");
     }
+
+    @ExceptionHandler(ProcessFailureException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result processFailureException() {
+        return responseService.getFailureResult(-400, "처리 과정에 오류가 발생했습니다.");
+    }
+
+    @ExceptionHandler(TodoNotfoundException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result todoNotfoundException() {
+        return responseService.getFailureResult(-404, "TODO를 찾을 수 없습니다.");
+    }
+
+    @ExceptionHandler(UserNotWriterException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result userNotWriterException() {
+        return responseService.getFailureResult(-401, "작성자가 아닙니다. 본인이 작성한 TODO만 이용할 수 있습니다.");
+    }
+
+    @ExceptionHandler(TodoDeleteFailureException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result todoDeleteFailureException() {
+        return responseService.getFailureResult(-400, "삭제에 실패 했습니다.");
+    }
+
+
+
+
 }
+

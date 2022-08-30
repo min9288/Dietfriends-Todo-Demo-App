@@ -1,8 +1,11 @@
 package com.DietfriendsTodoDemoApp.domain.user.entity;
 
+import com.DietfriendsTodoDemoApp.domain.todo.entity.Todo;
 import com.DietfriendsTodoDemoApp.domain.user.entity.enumPackage.Role;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -59,6 +62,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private List<Role> roles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Todo> todoList = new ArrayList<>();
+
     @Builder
     public User(String userName, String password, Integer age,List<Role> roles) {
         this.userName = userName;
@@ -67,7 +74,14 @@ public class User {
         this.roles = Collections.singletonList(Role.ROLE_MEMBER);
     }
 
+    // 토큰 재발행
     public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
+
+    // todo 연관관계 메서드
+    public void addTodo(Todo todo) {
+        todoList.add(todo);
+    }
+
 }
