@@ -3,7 +3,7 @@ jdk:
   - openjdk11
 brances:
   only:
-    - main
+    - master
 
 before_install:
   - chmod +x gradlew
