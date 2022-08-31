@@ -58,9 +58,10 @@ public class Todo {
     private User user;
 
     @Builder
-    public Todo(String name, Boolean completed) {
+    public Todo(String name, Boolean completed, LocalDateTime createdAt) {
         this.name = name;
         this.completed = completed;
+        this.createdAt = createdAt;
     }
 
     // todo 작성자 등록

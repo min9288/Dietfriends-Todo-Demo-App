@@ -36,6 +36,7 @@ public class TodoServiceImpl implements TodoService{
                 Todo.builder()
                         .name(requestDTO.getName())
                         .completed(requestDTO.getCompleted())
+                        .createdAt(LocalDateTime.now())
                         .build());
         todo.insertUser(findUser());
         return TodoAddResponseDTO.builder()
