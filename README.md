@@ -91,7 +91,9 @@ value : 엑세스 토큰값 (로그인시 Response 값으로 확인할 수 있�
 ## API 명세
 > signs - 토큰 인증 불필요
 >
-> todos - 토큰 인증 필요
+> todos - 토큰 인증 필요 
+>
+>Todo의 수정/조회/삭제는 작성자 본인인지 확인 후 처리합니다.
 
 
 ### signs - 회원가입
@@ -208,9 +210,9 @@ Response
     "data": {
         "todoUUID": "UUID",
         "name": "String",
-        "completed": false/true,
+        "completed": "false/true",
         "completed_at": null,
-        "createdAt": LocalDateTime
+        "createdAt": "LocalDateTime"
         "updated_at": "LocalDateTime"
     }
 }
@@ -219,9 +221,121 @@ Result (POST 후 생성되는 값)
 {
     "todoUUID": "UUID",
     "name": "String",
-    "completed": false/true,
+    "completed": "false/true",
     "completed_at": null,
-    "createdAt": LocalDateTime
+    "createdAt": "LocalDateTime",
     "updated_at": "LocalDateTime"
 }
 ```
+<br/>
+
+### todos - todo 수정
+```bash
+Put
+15.164.152.198/todos/{todoUUID}
+
+{
+    "name" : "String",
+    "completed" : "false/true"
+}
+
+Response
+{
+    "success": true,
+    "code": 200,
+    "msg": "성공",
+    "data": {
+        "todoUUID": "82fd6050-394b-4cb9-b7e9-0c581708fa9f",
+        "name": "과제 완료 수정",
+        "completed": "true",
+        "completedAt": "null/LocalDateTime",
+        "createAt": "2022-09-01T02:51:19.247614",
+        "updatedAt": "2022-09-01T02:51:19.263591"
+    }
+}
+
+Result (PUT 후 변경되는 값)
+{
+    "name": "String",
+    "completed": "false/true",
+    "completed_at": "null/LocalDateTime",
+    "updated_at": "LocalDateTime"
+}
+```
+
+<br/>
+
+### todos - todo 전체조회
+```bash
+Get
+15.164.152.198/todos/
+
+Response
+{
+   "success": true,
+    "code": 200,
+    "msg": "성공",
+    "data": [
+        {
+            "todoUUID": "UUID",
+            "name": "String",
+            "completed": "false/true",
+            "completedAt": "null/LocalDateTime",
+            "createdAt": "LocalDateTime",
+            "updatedAt": "LocalDateTime"
+        },
+        {
+            "todoUUID": "UUID",
+            "name": "String",
+            "completed": "false/true",
+            "completedAt": "null/LocalDateTime",
+            "createdAt": "LocalDateTime",
+            "updatedAt": "LocalDateTime"
+        },
+        ....
+    ]
+}
+```
+<br/>
+
+### todos - todo 선택조회
+```bash
+Get
+15.164.152.198/todos/{todoUUID}
+
+Response
+{
+   "success": true,
+    "code": 200,
+    "msg": "성공",
+    "data": 
+        {
+            "todoUUID": "UUID",
+            "name": "String",
+            "completed": "false/true",
+            "completedAt": "null/LocalDateTime",
+            "createdAt": "LocalDateTime",
+            "updatedAt": "LocalDateTime"
+        }
+}
+```
+
+<br/>
+
+### todos - todo 삭제
+```bash
+Delete
+15.164.152.198/todos/{todoUUID}
+
+Response
+{
+   "success": true,
+    "code": 200,
+    "msg": "성공",
+    "data": {
+        "successMSG": "삭제 성공"
+    }
+}
+```
+
+
