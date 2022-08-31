@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ec2-user/app/Dietfriends-Todo-Demo-App/
+    destination: /home/ec2-user/Dietfriends-Todo-Demo-App/
     overwrite: yes
 
 permissions:
