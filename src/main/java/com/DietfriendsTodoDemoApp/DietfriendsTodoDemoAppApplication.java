@@ -19,7 +19,7 @@ public class DietfriendsTodoDemoAppApplication {
 
 	public static final String APPLICATION_LOCATIONS = "spring.config.additional-location="
 			+"classpath:application.yml,"
-			+"/app/config/Dietfriends-Todo-Demo-App/springInfo-application.yml";
+			+"./app/config/Dietfriends-Todo-Demo-App/springInfo-application.yml";
 //			+"app/config/Dietfriends-Todo-Demo-App/springInfo-application.yml";  로컬용
 
 	public static void main(String[] args) {
