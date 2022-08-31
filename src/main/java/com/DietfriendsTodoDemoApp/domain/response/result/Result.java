@@ -1,10 +1,13 @@
 package com.DietfriendsTodoDemoApp.domain.response.result;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 public class Result implements Serializable {
     private boolean success;
     private int code;
