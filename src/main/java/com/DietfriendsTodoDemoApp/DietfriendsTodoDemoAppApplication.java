@@ -31,5 +31,4 @@ public class DietfriendsTodoDemoAppApplication {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
-
 }
