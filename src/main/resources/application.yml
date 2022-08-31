@@ -1,0 +1,49 @@
+---
+
+spring:
+  profiles:
+    group:
+      "local": "local_port"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "local_port"
+
+server:
+  port: 8083
+
+---
+
+spring:
+  profiles:
+    group:
+      "real1": "real1_port"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "real1_port"
+
+server:
+  port: 8081
+
+---
+spring:
+  profiles:
+    group:
+      "real2": "real2_port"
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "real2_port"
+
+server:
+  port: 8082
+
+---
