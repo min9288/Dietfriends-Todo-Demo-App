@@ -1,49 +1,23 @@
+# 로컬 환경
 ---
-
 spring:
   profiles:
-    group:
-      "local": "local_port"
+    active: local
 
----
-spring:
-  config:
-    activate:
-      on-profile: "local_port"
-
-server:
-  port: 8083
-
+  # 운영 환경 : set1 / set2
 ---
 
 spring:
-  profiles:
-    group:
-      "real1": "real1_port"
-
----
-spring:
-  config:
-    activate:
-      on-profile: "real1_port"
-
+  profiles: set1
 server:
   port: 8081
 
 ---
+
 spring:
-  profiles:
-    group:
-      "real2": "real2_port"
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: "real2_port"
-
+  profiles: set2
 server:
   port: 8082
+
 
 ---
